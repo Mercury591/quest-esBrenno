@@ -1,0 +1,163 @@
+Subject: [PATCH] Primeiro commit
+---
+Index: Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Main.java b/Main.java
+new file mode 100644
+--- /dev/null	(revision b796bdaacfb276b11b8c6ecefdaee2610c4342e2)
++++ b/Main.java	(revision b796bdaacfb276b11b8c6ecefdaee2610c4342e2)
+@@ -0,0 +1,150 @@
++import java.util.ArrayList;
++import java.util.List;
++import java.util.Scanner;
++
++class main {
++
++    private String pergunta;
++    private String correta;
++    private String opcaoA;
++    private String opcaoB;
++    private String opcaoC;
++    private String opcaoD;
++    private String opcaoE;
++
++    public static void main(String[]args){
++
++        System.out.println("UNIFAN - Alfredo Nasser");
++        System.out.println("Nome: Danilo Serafim Lima");
++        System.out.println("Professor: Brenno");
++        System.out.println(" ");
++        System.out.println("Seja bem vindo ao meu questionário!");
++
++        Quiz quiz = new Quiz();
++        Scanner scanner = null;
++
++        for (int i = 0; i < 15; i++){
++
++            System.out.println("Digite a pergunta " + (i + 1) + ":");
++            String pergunta = scanner.nextLine();
++
++            System.out.println("Digite a opção A: ");
++            String opcaoA = scanner.nextLine();
++
++            System.out.println("Digite a opção B: ");
++            String opcaoB = scanner.nextLine();
++
++            System.out.println("Digite a opção C: ");
++            String opcaoC = scanner.nextLine();
++
++            System.out.println("Digite a opção D: ");
++            String opcaoD = scanner.nextLine();
++
++            System.out.println("Digite a opção E: ");
++            String opcaoE = scanner.nextLine();
++
++            System.out.println("Digite a opção correta (A, B, C, D ou E): ");
++            String correta;
++        }
++    }
++
++    public class Questao {
++
++        String pergunta = "";
++        String opcaoA = "";
++        String opcaoB = "";
++        String opcaoC = "";
++        String opcaoD = "";
++        String opcaoE = "";
++        String correta = "";
++
++        public void isCorreta(String resposta) {
++        }
++
++        public void escrevaQuestao() {
++
++        }
++
++        public String leiaResposta() {
++            return null;
++        }
++    }
++
++    public boolean isCorreta(String resposta) {
++
++        if (resposta.equalsIgnoreCase(this.correta)) {
++            System.out.println("Parabéns resposta correta! - Letra: " + this.correta);
++            System.out.println(" ");
++            return true;
++        }else {
++            System.out.println("Resposta errada!");
++            System.out.println("A resposta correta é: " + this.correta);
++            System.out.println(" ");
++            return false;
++        }
++    }
++
++    public String leiaResposta() {
++
++        Scanner ler = new Scanner(System.in);
++        String resp;
++
++        do {
++            System.out.println("Digite a resposta: ");
++            resp = ler.next();
++        } while (!respostaValida(resp));{
++            return resp;
++        }
++    }
++
++    private boolean respostaValida(String resp) {
++        if (resp.equalsIgnoreCase("A") ||
++                resp.equalsIgnoreCase("B") ||
++                resp.equalsIgnoreCase("C") ||
++                resp.equalsIgnoreCase("D") ||
++                resp.equalsIgnoreCase("E")) {
++            return true;
++        }
++        System.out.println("Resposta inválida! digite opção A,B,C,D ou E.");
++        System.out.println(" ");
++        return false;
++    }
++
++
++
++    public void escrevaQuestao() {
++        System.out.println(this.pergunta);
++        System.out.println();
++        System.out.println(this.opcaoA);
++        System.out.println(this.opcaoB);
++        System.out.println(this.opcaoC);
++        System.out.println(this.opcaoD);
++        System.out.println(this.opcaoE);
++        System.out.println();
++    }
++}
++
++class Quiz {
++
++        private List<main.Questao> questoes;
++
++        public Quiz() {
++            questoes = new ArrayList<>();
++        }
++
++        public void adicionarQuestao (main.Questao questao) {
++            questoes.add(questao);
++        }
++
++        public void executar() {
++
++            Scanner scan = new Scanner(System.in);
++
++            for (main.Questao questao : questoes) {
++                questao.escrevaQuestao();
++                String resposta = questao.leiaResposta();
++                questao.isCorreta(resposta);
++            }
++            Scanner.close();
++        }
++    }
+\ No newline at end of file

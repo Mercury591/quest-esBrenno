@@ -2,149 +2,99 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class main {
+class Main {
 
-    private String pergunta;
-    private String correta;
-    private String opcaoA;
-    private String opcaoB;
-    private String opcaoC;
-    private String opcaoD;
-    private String opcaoE;
-
-    public static void main(String[]args){
-
-        System.out.println("UNIFAN - Alfredo Nasser");
-        System.out.println("Nome: Danilo Serafim Lima");
-        System.out.println("Professor: Brenno");
-        System.out.println(" ");
-        System.out.println("Seja bem vindo ao meu questionário!");
-
+    public static void main(String[] args) {
         Quiz quiz = new Quiz();
-        Scanner scanner = null;
-
-        for (int i = 0; i < 15; i++){
-
-            System.out.println("Digite a pergunta " + (i + 1) + ":");
-            String pergunta = scanner.nextLine();
-
-            System.out.println("Digite a opção A: ");
-            String opcaoA = scanner.nextLine();
-
-            System.out.println("Digite a opção B: ");
-            String opcaoB = scanner.nextLine();
-
-            System.out.println("Digite a opção C: ");
-            String opcaoC = scanner.nextLine();
-
-            System.out.println("Digite a opção D: ");
-            String opcaoD = scanner.nextLine();
-
-            System.out.println("Digite a opção E: ");
-            String opcaoE = scanner.nextLine();
-
-            System.out.println("Digite a opção correta (A, B, C, D ou E): ");
-            String correta;
-        }
+        // Adicionar questões ao quiz
+        quiz.adicionarQuestao(new Questao("Qual a capital do Brasil?", "A) Brasília", "B) Rio de Janeiro", "C) São Paulo", "D) Salvador", "E) Belo Horizonte", "A"));
+        quiz.executar();
     }
 
-    public class Questao {
+    static class Questao {
+        private String pergunta;
+        private String opcaoA;
+        private String opcaoB;
+        private String opcaoC;
+        private String opcaoD;
+        private String opcaoE;
+        private String correta;
 
-        String pergunta = "";
-        String opcaoA = "";
-        String opcaoB = "";
-        String opcaoC = "";
-        String opcaoD = "";
-        String opcaoE = "";
-        String correta = "";
-
-        public void isCorreta(String resposta) {
+        public Questao(String pergunta, String opcaoA, String opcaoB, String opcaoC, String opcaoD, String opcaoE, String correta) {
+            this.pergunta = pergunta;
+            this.opcaoA = opcaoA;
+            this.opcaoB = opcaoB;
+            this.opcaoC = opcaoC;
+            this.opcaoD = opcaoD;
+            this.opcaoE = opcaoE;
+            this.correta = correta;
         }
 
         public void escrevaQuestao() {
-
+            System.out.println(this.pergunta);
+            System.out.println(this.opcaoA);
+            System.out.println(this.opcaoB);
+            System.out.println(this.opcaoC);
+            System.out.println(this.opcaoD);
+            System.out.println(this.opcaoE);
+            System.out.println();
         }
 
         public String leiaResposta() {
-            return null;
-        }
-    }
-
-    public boolean isCorreta(String resposta) {
-
-        if (resposta.equalsIgnoreCase(this.correta)) {
-            System.out.println("Parabéns resposta correta! - Letra: " + this.correta);
-            System.out.println(" ");
-            return true;
-        }else {
-            System.out.println("Resposta errada!");
-            System.out.println("A resposta correta é: " + this.correta);
-            System.out.println(" ");
-            return false;
-        }
-    }
-
-    public String leiaResposta() {
-
-        Scanner ler = new Scanner(System.in);
-        String resp;
-
-        do {
-            System.out.println("Digite a resposta: ");
-            resp = ler.next();
-        } while (!respostaValida(resp));{
+            Scanner ler = new Scanner(System.in);
+            String resp;
+            do {
+                System.out.println("Digite a resposta: ");
+                resp = ler.next();
+            } while (!respostaValida(resp));
             return resp;
         }
-    }
 
-    private boolean respostaValida(String resp) {
-        if (resp.equalsIgnoreCase("A") ||
-                resp.equalsIgnoreCase("B") ||
-                resp.equalsIgnoreCase("C") ||
-                resp.equalsIgnoreCase("D") ||
-                resp.equalsIgnoreCase("E")) {
-            return true;
+        private boolean respostaValida(String resp) {
+            if (resp.equalsIgnoreCase("A") ||
+                    resp.equalsIgnoreCase("B") ||
+                    resp.equalsIgnoreCase("C") ||
+                    resp.equalsIgnoreCase("D") ||
+                    resp.equalsIgnoreCase("E")) {
+                return true;
+            }
+            System.out.println("Resposta inválida! digite opção A,B,C,D ou E.");
+            System.out.println();
+            return false;
         }
-        System.out.println("Resposta inválida! digite opção A,B,C,D ou E.");
-        System.out.println(" ");
-        return false;
-    }
 
-
-
-    public void escrevaQuestao() {
-        System.out.println(this.pergunta);
-        System.out.println();
-        System.out.println(this.opcaoA);
-        System.out.println(this.opcaoB);
-        System.out.println(this.opcaoC);
-        System.out.println(this.opcaoD);
-        System.out.println(this.opcaoE);
-        System.out.println();
+        public boolean isCorreta(String resposta) {
+            if (resposta.equalsIgnoreCase(this.correta)) {
+                System.out.println("Parabéns resposta correta! - Letra: " + this.correta);
+                System.out.println();
+                return true;
+            } else {
+                System.out.println("Resposta errada!");
+                System.out.println("A resposta correta é: " + this.correta);
+                System.out.println();
+                return false;
+            }
+        }
     }
 }
 
 class Quiz {
 
-        private List<main.Questao> questoes;
+    private List<Main.Questao> questoes;
 
-        public Quiz() {
-            questoes = new ArrayList<>();
-        }
+    public Quiz() {
+        questoes = new ArrayList<>();
+    }
 
-        public void adicionarQuestao (main.Questao questao) {
-            questoes.add(questao);
-        }
+    public void adicionarQuestao(Main.Questao questao) {
+        questoes.add(questao);
+    }
 
-        public void executar() {
-
-            Scanner scan = new Scanner(System.in);
-
-            for (main.Questao questao : questoes) {
-                questao.escrevaQuestao();
-                String resposta = questao.leiaResposta();
-                questao.isCorreta(resposta);
-            }
-            Scanner.close();
+    public void executar() {
+        for (Main.Questao questao : questoes) {
+            questao.escrevaQuestao();
+            String resposta = questao.leiaResposta();
+            questao.isCorreta(resposta);
         }
     }
+}
